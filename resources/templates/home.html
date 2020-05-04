@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments/header :: header">
+    <title>Welcome | DCCA</title>
+  </head>
+
+  <body>
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+      <section class="home">
+        <!-- 이미지 슬라이드 -->
+        <div class="slider">
+          <!-- 이미지 슬라이드-1 -->
+          <div
+            class="slide active"
+            style="background-image: url('image/slide-1.jpg');"
+          >
+            <div class="container2">
+              <!-- 이미지 슬라이드 내용 -->
+              <div class="caption">
+                <h1 class="cap__title">제목 영역</h1>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <a href="">Bla Bla</a>
+              </div>
+            </div>
+          </div>
+          <!-- 이미지 슬라이드-2 -->
+          <div
+            class="slide"
+            style="background-image: url('image/slide-2.jpg');"
+          >
+            <div class="container2">
+              <div class="caption">
+                <h1 class="cap__title">제목 영역</h1>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <a href="">Bla Bla</a>
+              </div>
+            </div>
+          </div>
+          <!-- 이미지 슬라이드-3 -->
+          <div
+            class="slide"
+            style="background-image: url('image/slide-3.jpg');"
+          >
+            <div class="container2">
+              <div class="caption">
+                <h1 class="cap__title">제목 영역</h1>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <a href="">Bla Bla</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- controls -->
+        <div class="controls">
+          <!-- 이미지 슬라이드 버튼 -->
+          <div class="prev"><i class="xi-angle-left"></i></div>
+          <div class="next"><i class="xi-angle-right"></i></div>
+        </div>
+        <!-- 이미지 원 -->
+        <div class="indicator"></div>
+      </section>
+      <main class="contents">
+        <div class="announce">
+          <span class="title">공지 사항</span>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae eius,
+          error exercitationem ullam itaque ad tempora accusantium obcaecati,
+          inventore repellat voluptatum id recusandae earum asperiores eum
+          fugiat nisi odit magni animi nobis aspernatur? Sequi ipsam nemo
+          laudantium a quaerat tempore, animi veritatis aperiam vel
+          reprehenderit mollitia unde. Tenetur, aliquid vitae.
+        </div>
+        <div class="article">
+          <span class="title">보도 자료</span>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis
+          sapiente pariatur dignissimos dolorem vitae laudantium neque suscipit
+          dicta blanditiis temporibus! Ullam deserunt nemo atque dolore
+          assumenda optio cumque itaque necessitatibus illo maxime, et officia
+          minima expedita consectetur odio consequuntur provident suscipit
+          similique reprehenderit sequi dolorem dicta asperiores libero facilis?
+          Quae.
+        </div>
+        <div class="something">
+          <span class="title">제 목</span>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
+          voluptatibus laborum id ea nobis aspernatur, beatae ducimus tempora
+          tenetur adipisci hic iusto ullam sequi facilis impedit nesciunt dolore
+          est esse quia? Molestiae asperiores beatae cum tempore quaerat, iure
+          qui veniam provident ratione ipsam saepe nesciunt ipsa nemo suscipit
+          quos tenetur!
+        </div>
+      </main>
+
+
+    </div>
+    <script src="js/nav.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+  <div th:replace="fragments/footer :: footer"/>
+</html>

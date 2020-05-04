@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>협회소개 | DCCA</title>
+  </head>
+
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div th:replace="fragments/associationLeftMenu :: associationLeftMenu"/>
+
+      <div class="content">
+        <div class="content__title"><h1>협회 조직도</h1></div>
+        <div class="content__content">
+          <img src="image/chart.jpg" class="chart" />
+        </div>
+      </div>
+    </div>
+    <script src="static/js/nav.js"></script>
+  </body>
+<div th:replace="fragments/footer :: footer"/>
+</html>

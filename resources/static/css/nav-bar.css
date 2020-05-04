@@ -1,0 +1,259 @@
+/* logo */
+.nav-bar__logo {
+  font-size: 60px;
+  font-weight: 700;
+  padding: 50px 0 0 0;
+  width: 150px;
+  color: white;
+  left: 15%;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  top: 0;
+  background: #263343;
+  height: 150px;
+
+  text-align: center;
+  font-size: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  z-index: 8;
+}
+.nav-bar__list {
+  display: inline-block;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+.nav-bar__list:hover {
+  overflow: visible;
+}
+/* 메뉴 배경 */
+.background-bar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50px;
+  width: 50%;
+  height: 0;
+  background: rgba(38, 51, 67, 0.7);
+  opacity: 0;
+  transition: all 0.5s;
+  box-sizing: border-box;
+  background-clip: content-box;
+  z-index: 4;
+}
+.nav-bar__list:hover + .background-bar {
+  height: 420px;
+  opacity: 1;
+}
+/* 메뉴 li */
+.nav-bar__list-item {
+  margin-top: 65px;
+  display: inline-block;
+  position: relative;
+  z-index: 5;
+}
+
+.nav-bar__list-item > h1 {
+  display: block;
+  position: relative;
+  margin-top: 5%;
+  width: 200px;
+  height: 70px;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 80px;
+  color: white;
+}
+.nav-bar__list-item > h1:hover {
+  background-color: #e96b56;
+  transition: all 0.5s;
+}
+/* dropdown-menu */
+.dropdown-menu {
+  position: absolute;
+  width: 100%;
+  padding-top: 20px;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.5s;
+}
+.nav-bar__list:hover .dropdown-menu {
+  opacity: 1;
+}
+
+.nav-bar__list .dropdown-menu li {
+  line-height: 60px;
+}
+.nav-bar__list .dropdown-menu a {
+  position: relative;
+  font-size: 17px;
+  color: #fff;
+  transition: all 0.5s;
+}
+
+.nav-bar__list .dropdown-menu a:hover {
+  color: #e96b56;
+}
+
+.nav-bar__list .dropdown-menu a:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 0;
+  height: 2px;
+  background: #e96b56;
+  transition: all 0.5s;
+}
+.nav-bar__list .dropdown-menu a:hover:after {
+  left: 0;
+  width: 100%;
+}
+/* 로그인, 회원가입 */
+.nav-bar__button {
+  display: flex;
+  align-items: center;
+  padding-top: 30px;
+  line-height: 100px;
+  background: #263343;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+.nav-bar__register {
+  margin-right: 30px;
+  transition: all 0.2s;
+}
+.nav-bar__register:hover {
+  color: #e96b56;
+}
+.nav-bar__login {
+  transition: all 0.2s;
+}
+.nav-bar__login:hover {
+  color: #e96b56;
+}
+/* 웹페이지에서 모바일 아이콘 가림 */
+.burger {
+  display: none;
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px;
+  z-index: 11;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 1400px) {
+  .background-bar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .nav-bar__logo {
+    left: 0;
+    width: 40%;
+  }
+  .background-bar {
+    display: none;
+  }
+  .nav-bar__list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    right: 0px;
+    top: 11.5vh;
+    width: 50%;
+    height: 110vh;
+    background-color: #263343;
+    z-index: 11;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in;
+  }
+  /* 애니메이션을 위한 설정 */
+  .nav-bar__list-item {
+    opacity: 0;
+  }
+  /* 모바일 버전 아이콘 */
+  .burger {
+    display: block;
+    margin-top: 60px;
+    cursor: pointer;
+  }
+  .burger div {
+    width: 50px;
+    height: 4px;
+    margin: 10px;
+  }
+  /* 웹페이지 버전 스타일 적용 해제( 수정 필요 ) */
+  .nav-bar__list:hover .dropdown-menu {
+    display: none;
+  }
+  .nav-bar__list-item:hover .dropdown-menu {
+    display: inline;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .nav-active {
+    transform: translateX(0%);
+  }
+
+  @keyframes navLinkFade {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+
+  /* 메뉴 아이콘 */
+  .toggle .line1 {
+    transform: translateY(14px) rotate(-45deg);
+  }
+  .toggle .line2 {
+    opacity: 0;
+  }
+  .toggle .line3 {
+    transform: translateY(-14px) rotate(45deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-bar {
+    height: 20vh;
+    display: flex;
+    justify-content: space-between;
+    border: none;
+  }
+  .nav-bar__logo {
+    padding: 50px 0 0 0;
+  }
+  .nav-bar__list {
+    width: 100%;
+    top: 20vh;
+    height: 120vh;
+  }
+  .nav-bar__button {
+    display: none;
+  }
+  .burger {
+    margin-right: 30px;
+  }
+  .burger div {
+    width: 50px;
+    height: 4px;
+    margin-top: 10px;
+  }
+}

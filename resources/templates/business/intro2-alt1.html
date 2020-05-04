@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>WRO 대회 | DCCA</title>
+  </head>
+
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div th:replace="fragments/businessLeftMenu :: businessLeftMenu"/>
+
+      <div class="right-Menu"></div>
+      <div class="content">
+        <div class="content__title"><h1>WRO 대회</h1></div>
+        <div class="content__content">
+          <div class="content__image">
+            <img src="image/wro.jpg" class="wro" />
+            <a href="http://wrokorea.kr/skin67/" class="shortcut">
+              WRO대회 홈페이지 바로가기</a
+            >
+          </div>
+
+          <h1>대회 종목</h1>
+
+          <p>
+            월드 로봇 올림피아드(WRO)에는 정규, 창작, WRO 축구, 고급 로봇공학
+            종목이 있습니다.
+          </p>
+          <ul>
+            <li>
+              WeDo : 대회가 열리는 해에 최대 초등학교 3학년이거나 해당 연령의
+              청소년
+            </li>
+            <li>
+              초등부 : 대회가 열리는 해에 초등학교 재학 중이거나 해당 연령의
+              청소년
+            </li>
+            <li>
+              중등부 : 대회가 열리는 해에 중학교 재학 중이거나 해당 연령의
+              청소년
+            </li>
+            <li>
+              고등부 : 대회가 열리는 해에 고등학교 재학 중이거나 해당 연령의
+              청소년
+            </li>
+          </ul>
+          <h1>참가 방법</h1>
+          <ul>
+            <li>
+              WRO는 팀 기반 경기로 각 경기 종목에 출전하기 위해서는, 참가자는
+              반드시 팀으로 구성되어야 한다.
+            </li>
+            <li>한 팀은 1명의 코치와 2~3명의 팀원으로 구성되어야 한다.</li>
+            <li>
+              한 명의 코치와 한 명의 팀원은 팀으로 간주하지 않으며, 출전이
+              불가하다.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="js/nav.js"></script>
+  </body>
+<div th:replace="fragments/footer :: footer"/>
+</html>

@@ -1,0 +1,138 @@
+.page {
+  padding: 0;
+  display: grid;
+}
+.left-Menu {
+  grid-column: 1 / 2;
+  grid-row: 2 / 4;
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  height: 30rem;
+  margin-top: 3rem;
+  margin-left: 4rem;
+  background: #999;
+}
+.left-Menu__title {
+  width: 100%;
+  font-size: 40px;
+  line-height: 10rem;
+  color: white;
+  font-weight: 700;
+  border-bottom: 1px solid #777;
+}
+.left-Menu__title h1 {
+  margin-left: 3rem;
+}
+.left-Menu__menu {
+  height: 100%;
+  margin-top: 2rem;
+  margin-left: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 20px;
+}
+.content {
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 3rem 0 1rem;
+
+  width: 75vw;
+  height: 100%;
+  border: 1px solid #999;
+}
+.content__title {
+  padding-left: 3rem;
+  line-height: 10rem;
+  height: 10rem;
+  font-size: 50px;
+  border-bottom: 1px solid #333;
+}
+.content__content {
+  padding: 3rem;
+  font-size: 20px;
+  line-height: 40px;
+}
+.content__content li {
+  display: flex;
+}
+.content__content li:before {
+  content: "✔";
+  margin-right: 0.5rem;
+}
+.content__image {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 0 3rem 10rem;
+  width: 80%;
+}
+.content__image a {
+  width: inherit;
+  height: 4rem;
+  background: #777;
+  color: white;
+  text-align: center;
+  line-height: 4rem;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.wro {
+  width: inherit;
+  background: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.tanz,
+.dcca {
+  height: 500px;
+  border-radius: 15px;
+}
+.chart {
+  width: 80%;
+  height: inherit;
+  margin: 0;
+  border-radius: 15px;
+}
+.content__content > h1 {
+  font-size: 25px;
+  margin: 2rem 0;
+}
+.content__content > h2 {
+  margin: 0 0 1.5rem 1.5rem;
+}
+.content__content > ul {
+  margin-top: 3rem;
+}
+.content__content > ul > li {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 1200px) {
+  .left-Menu {
+    display: none;
+  }
+  .content__image {
+    width: auto;
+    margin: 0;
+  }
+  .tanz,
+  .dcca {
+    height: 400px;
+  }
+}
+
+@media (max-width: 800px) {
+  .page {
+    display: flex;
+    flex-direction: column;
+  }
+  .content {
+    width: 95%;
+  }
+  .tanz,
+  .dcca {
+    height: 200px;
+  }
+}
