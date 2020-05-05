@@ -1,10 +1,11 @@
 package kr.or.dcca.dcca.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
     @GetMapping("/")
@@ -65,16 +66,4 @@ public class HomeController {
     public String data() {
         return "board/data";
     }
-//
-//    // 회원가입
-//    @GetMapping("login/signup")
-//    public String signup() {
-//        return "login/signup";
-//    }
-//
-//    // 로그인
-//    @GetMapping("login/signin")
-//    public String signin() {
-//        return "login/signin";
-//    }
 }
