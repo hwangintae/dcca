@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="bodyHeader">
     <div class="page">
         <!--Header 시작-->
@@ -41,7 +41,7 @@
                         <h1>협 회 소 식</h1>
 
                         <ul class="dropdown-menu">
-                            <li><a href="#">공지사항</a></li>
+                            <li><a href="/board/list">공지사항</a></li>
                             <li><a href="#">보도자료</a></li>
                             <li><a href="/board/pic">협회 갤러리</a></li>
                         </ul>
@@ -59,7 +59,19 @@
               </span>
                     <span class="nav-bar__login">
                 <i class="xi-lock"></i>
-                <a href="/member/log/login">로그인</a>
+<!--                        로그인 세션-->
+<!--                        ROLE_ADMIN 권한이 있는 경우만 표시됨-->
+                        <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">관리자 페이지</a></li>
+<!--                        ROLE_USER 권한이 있는 경우만 표시됨-->
+<!--                        <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/books}">책 목록</a></li>-->
+<!--                        로그인이 되지 않은 경우 표시-->
+                        <li sec:authorize="!isAuthenticated()"><a href="/member/log/login">로그인</a></li>
+<!--                        로그인 된 경우의 username을 출력-->
+                        <li sec:authorize="isAuthenticated()"><span sec:authentication="principal.userEmail"></span></li>
+<!--                        변수처럼 사용하고 싶은 경우-->
+<!--                        <a th:href="@{'/users/'+ ${#authentication.principal.id}}">마이페이지</a>-->
+                        <!--                        로그인 세션/ -->
+<!--                <a href="/member/log/login">로그인</a>-->
               </span>
                 </div>
                 <div class="burger">

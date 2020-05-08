@@ -4,15 +4,17 @@ import kr.or.dcca.dcca.domain.Address;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Getter @Setter
 public class MemberForm {
 
-    private String userId;
+    private String email;
     private String password;
 
     private String userName;
-    private int age;
-    private String email;
+    private Date birth;
+
 
     private int zipcode;
 

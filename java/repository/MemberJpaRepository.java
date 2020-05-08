@@ -15,4 +15,8 @@ public class MemberJpaRepository {
     public void save(Member member) {
         em.persist(member);
     }
+
+    public Member findByEmail(String email) {
+        return em.find(Member.class, email);
+    }
 }

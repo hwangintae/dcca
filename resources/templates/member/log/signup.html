@@ -13,11 +13,11 @@
   <div class="content__title"><h1>회원가입</h1></div>
   <form role="form" action="/member/new" th:object="${memberForm}"
         method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <div>
-      <label th:for="userId">아이디(ID)</label>
-      <input type="text" id="userId" th:field="*{userId}"
-             placeholder="id을 입력하세요">
-<!--      <input type="button" onclick="chkMember(userId)" value="중복확인">-->
+      <label th:for="email">email</label>
+      <input type="email" id="email" th:field="*{email}"
+             placeholder="email을 입력하세요">
     </div>
     <div>
       <label th:for="password">비밀번호(PW)</label>
@@ -28,6 +28,7 @@
       <label th:for="password">비밀번호 확인</label>
       <input type="password"
              placeholder="같은 비밀번호를 입력해 주세요">
+<!--      비밀번호 확인은 js로 구현하자-->
     </div>
     <div>
       <label th:for="userName">이름</label>
@@ -35,9 +36,9 @@
              placeholder="이름을 입력하세요">
     </div>
     <div>
-      <label th:for="age">나이</label>
-      <input type="number" th:field="*{age}"
-             placeholder="나이를 입력하세요">
+      <label th:for="age">생년월일</label>
+      <input type="date" th:field="*{birth}"
+             placeholder="생년월일를 입력하세요">
     </div>
 
 <!--    다음 우편번호 서비스 http://postcode.map.daum.net/guide-->
@@ -126,7 +127,7 @@
         element_wrap.style.display = 'block';
       }
     </script>
-    다음 우편번호 서비스 END
+<!--    다음 우편번호 서비스 END-->
 
     <br>
     <button type="submit">Submit</button>

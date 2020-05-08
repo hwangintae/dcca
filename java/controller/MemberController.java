@@ -1,7 +1,9 @@
 package kr.or.dcca.dcca.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import kr.or.dcca.dcca.domain.Address;
 import kr.or.dcca.dcca.domain.Member;
+import kr.or.dcca.dcca.domain.Role;
 import kr.or.dcca.dcca.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,30 +36,23 @@ public class MemberController {
 
         if (result.hasErrors()) return "member/log/signup";
         Address address = new Address(form.getZipcode(), form.getFirAdd(), form.getSecAdd(), form.getEtc());
-
-        Member member = new Member();
-        member.setUserId(form.getUserId());
-        member.setPassword(form.getPassword());
-        member.setUserName(form.getUserName());
-        member.setAge(form.getAge());
-        member.setAddress(address);
+        Member member = Member.builder()
+                .email(form.getEmail())
+                .password(form.getPassword())
+                .userName(form.getUserName())
+                .birth(form.getBirth())
+                .address(address)
+                .role(Role.MEMBER).build();
 
         memberService.joinV1(member);
 
         return "redirect:/";
     }
 
-//    //Id 중복확인
-//    @PostMapping("member/{userId}/chk")
-//    public boolean chkMember(@PathVariable("userId") String userId) {
-//        return memberService.chkUserId(userId);
-//    }
-
-
     // 로그인
     @GetMapping("member/log/login")
-    public String signIn() {
+    public String signIn(Model model) {
+        model.addAttribute("memberForm", new MemberForm());
         return "member/log/signin";
     }
-
 }
