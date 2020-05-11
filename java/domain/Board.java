@@ -5,27 +5,24 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor
-public class Board {
+public class Board extends Time{
 
     @Id @GeneratedValue
     private Long id;
-
     private String title;
     private String content;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private String writer;
 
     @Builder
-    public Board(Long id, String title, String content, LocalDateTime createdDate, LocalDateTime updateDate) {
+    public Board(Long id, String title, String content, String writer) {
         this.id = id;
+
         this.title = title;
         this.content = content;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
+        this.writer = writer;
     }
 }

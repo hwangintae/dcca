@@ -7,6 +7,7 @@ import kr.or.dcca.dcca.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -47,14 +48,13 @@ public class MemberService implements UserDetailsService {
         return findMember;
     }
 
-
-
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
 //        Member findMember = memberJpaRepository.findByEmail(userEmail);
         Optional<Member> findMember = memberRepository.findByEmail(userEmail);
 
         Member findMemberEntity = findMember.get();
+
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getKey()));

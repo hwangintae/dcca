@@ -21,8 +21,8 @@
     </div>
     <div>
       <label th:for="password">비밀번호(PW)</label>
-      <input type="password" th:field="*{password}"
-             placeholder="비밀번호를 입력하세요">
+      <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z]).{8,}" th:field="*{password}"
+             placeholder="영어, 숫자, 특수문자를 포함하여 8자리를 입력하세요">
     </div>
     <div>
       <label th:for="password">비밀번호 확인</label>
@@ -38,7 +38,7 @@
     <div>
       <label th:for="age">생년월일</label>
       <input type="date" th:field="*{birth}"
-             placeholder="생년월일를 입력하세요">
+             placeholder="생년월일를 입력하세요" max="9999-12-31">
     </div>
 
 <!--    다음 우편번호 서비스 http://postcode.map.daum.net/guide-->
@@ -135,7 +135,7 @@
   <br/>
 </div>
 </div>
-<script src="nav.js"></script>
+<script src="/js/nav.js"></script>
 </body>
 <div th:replace="fragments/footer :: footer"/>
 </html>

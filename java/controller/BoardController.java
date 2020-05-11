@@ -1,79 +1,77 @@
 package kr.or.dcca.dcca.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import kr.or.dcca.dcca.config.auth.dto.BoardDto;
 import kr.or.dcca.dcca.domain.Board;
-import kr.or.dcca.dcca.repository.BoardRepository;
 import kr.or.dcca.dcca.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class BoardController {
+
     @Autowired
     private BoardService boardService;
 
-    @Autowired
-    private BoardRepository boardRepository;
-
-    /*
-     * 게시글 목록
-     */
+    // 게시판 목록
     @GetMapping("board/list")
-    public String list(@PageableDefault Pageable pageable, Model model) {
-        model.addAttribute("boardList", boardService.findBoardList(pageable));
+    public String list(Model model) {
+        List<BoardDto> boards = boardService.getBoardList();
+
+        model.addAttribute("boardList", boards);
         return "board/notifyList";
     }
 
-    /*
-     * 게시글 상세 및 등록 폼 호출
-     */
-    @GetMapping("board")
-    public String board(@RequestParam(value = "id", defaultValue = "0") Long id, Model model) {
-        model.addAttribute("board", boardService.findBoardById(id));
+    // 글 생성
+    @GetMapping("board/create")
+    public String create(Model model) {
+        model.addAttribute("boardForm", new Board());
         return "board/notify";
     }
-
-    /*
-     * 게시글 생성
-     */
     @PostMapping("board/create")
-    public ResponseEntity<?> postBoard(@RequestBody Board board) {
-        board.setCreateDate(LocalDateTime.now());
-        board.setUpdateDate(LocalDateTime.now());
-        boardRepository.save(board);
+    public String create(BoardDto boardDto) {
+        boardService.save(boardDto);
+        return "redirect:/board/list";
+    }
+    // end
 
-        return new ResponseEntity<>("{}", HttpStatus.CREATED);
+    // 글 조회
+    @GetMapping("board/notify/{no}")
+    public String detail(@PathVariable("no") Long no, Model model) {
+        BoardDto boardDto = boardService.getBoard(no);
+
+        model.addAttribute("boardDto", boardDto);
+        return "board/notifyDetail";
     }
 
-    /*
-     * 게시글 수정
-     */
-    @PutMapping("board/{id}")
-    public ResponseEntity<?> putBoard(@PathVariable("id") Long idx, @RequestBody Board board) {
-        Board updateBoard = boardRepository.getOne(idx);
-        updateBoard.setTitle(board.getTitle());
-        updateBoard.setContent(board.getContent());
-        updateBoard.setUpdateDate(LocalDateTime.now());
-        boardRepository.save(updateBoard);
+    // 글 수정
+    @GetMapping("board/notify/modify/{no}")
+    public String edit(@PathVariable("no") Long no, Model model) {
+        BoardDto boardDto = boardService.getBoard(no);
 
-        return new ResponseEntity<>("{}", HttpStatus.OK);
+        model.addAttribute("boardDto", boardDto);
+        return "board/notifyUpdate";
     }
 
-    /*
-     * 게시글 삭제
-     */
-    @DeleteMapping("board/{id}")
-    public ResponseEntity<?> deleteBoard(@PathVariable("id") Long idx) {
-        boardRepository.deleteById(idx);
-        return new ResponseEntity<>("{}", HttpStatus.OK);
+    @PutMapping("board/notify/modify/{no}")
+    public String update(BoardDto boardDto) {
+        boardService.save(boardDto);
+        return "redirect:/board/list";
+    }
+    // end
+
+    // 글 삭제
+    @DeleteMapping("board/notify/{no}")
+    public String delete(@PathVariable("no") Long no) {
+        boardService.deleteBoard(no);
+
+        return "redirect:/board/list";
     }
 }

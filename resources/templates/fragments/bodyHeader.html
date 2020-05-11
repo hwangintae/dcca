@@ -54,10 +54,7 @@
                 <!-- 회원가입, 로그인 -->
                 <div class="nav-bar__button">
               <span class="nav-bar__register">
-                <i class="xi-mail"></i>
-                <a href="/member/new">회원가입</a>
               </span>
-                    <span class="nav-bar__login">
                 <i class="xi-lock"></i>
 <!--                        로그인 세션-->
 <!--                        ROLE_ADMIN 권한이 있는 경우만 표시됨-->
@@ -65,14 +62,22 @@
 <!--                        ROLE_USER 권한이 있는 경우만 표시됨-->
 <!--                        <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/books}">책 목록</a></li>-->
 <!--                        로그인이 되지 않은 경우 표시-->
-                        <li sec:authorize="!isAuthenticated()"><a href="/member/log/login">로그인</a></li>
+                        <span class="nav-bar__register">
+                            <a href="/member/new" sec:authorize="!isAuthenticated()">회원가입</a>
+                        </span>
+
+                        <span class="nav-bar__register">
+                            <a href="/member/log/login" sec:authorize="!isAuthenticated()">로그인</a>
+                        </span>
+
+
 <!--                        로그인 된 경우의 username을 출력-->
-                        <li sec:authorize="isAuthenticated()"><span sec:authentication="principal.userEmail"></span></li>
+                        <li sec:authorize="isAuthenticated()"><span sec:authentication var ="principal" property="principal"></span>
+                            <a th:text="'환엽합니다. ' + ${principal}"></a></li>
 <!--                        변수처럼 사용하고 싶은 경우-->
 <!--                        <a th:href="@{'/users/'+ ${#authentication.principal.id}}">마이페이지</a>-->
                         <!--                        로그인 세션/ -->
 <!--                <a href="/member/log/login">로그인</a>-->
-              </span>
                 </div>
                 <div class="burger">
                     <div class="line1"></div>
