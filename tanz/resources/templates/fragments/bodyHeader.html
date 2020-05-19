@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<div class="header" th:fragment="bodyHeader">
+    <a href="/"><h3 class="text-muted">TANZ MANAGE</h3></a>
+    <ul class="nav nav-pills pull-right">
+        <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">log in</a></li>
+            <li sec:authorize="!isAuthenticated()"><a th:href="@{/new}">회원가입</a></li>
+        <li sec:authorize="isAuthenticated()"><a>Hello! [[${#httpServletRequest.remoteUser}]]</a>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">log out</a></li>
+    </ul>
+</div>

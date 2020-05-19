@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />SELECT * FROM MEMBER
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <form role="form" th:action="@{/board/create}" th:object="${boardForm}"
+          method="post">
+        <table class="table" >
+        <tr>
+            <th style="padding:13px 0 0 15px;">제목</th>
+            <td>
+                <input type="text" name="title" th:field="*{title}">
+            </td>
+        </tr>
+        <tr>
+            <th style="padding:13px 0 0 15px;">작성자</th>
+
+            <td>
+                <input type="text" name="writer" th:field="*{writer}">
+            </td>
+        </tr>
+        <tr>
+            <th style="padding:13px 0 0 15px;">내용</th>
+            <td>
+                        <textarea id="board_content" class="form-control input-sm" name="content"
+                                  maxlength="140" rows="70" style="height: 200px;"></textarea>
+                <span class="help-block"></span>
+            </td>
+        </tr>
+        </table>
+        <input type="submit" value="등록">
+    </form>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>
+
+
+

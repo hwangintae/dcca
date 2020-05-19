@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <form role="form" th:action="@{/course/new}" th:object="${courseForm}"
+          method="post">
+        <div class="form-group">
+            <label th:for="courseName">과정명</label>
+            <input type="text" th:field="*{courseName}" class="form-control"
+                   placeholder="과정명을 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="courseStart">과정 시작</label>
+            <input type="date" max="9999-12-31" th:field="*{courseStart}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label th:for="courseEnd">과정 종료</label>
+            <input type="date" max="9999-12-31" th:field="*{courseEnd}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label th:for="grade">학년</label>
+            <input type="number" th:field="*{grade}" class="form-control"
+                   placeholder="학년을 입력하세요">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br/>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>

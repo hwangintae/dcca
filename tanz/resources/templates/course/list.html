@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" type="button"
+       class="tn btn-primary" th:href="@{/course/new}">등록</a>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="one wide">과정ID</th>
+                <th class="ten wide">과정명</th>
+                <th class="two wide">과정시작</th>
+                <th class="three wide">과정종료</th>
+                <th class="three wide">개설과목 수</th>
+                <th class="three wide">수강 인원</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <!-- CONTENTS !-->
+            <tr th:each="course : ${courseList}">
+                <td>
+                    <span th:text="${course.id}"></span>
+                </td>
+                <td>
+                    <span th:text="${course.courseName}"></span>
+                </td>
+                <td>
+                    <span th:text="${course.courseStart}"></span>
+                </td>
+                <td>
+                    <span th:text="${course.courseEnd}"></span>
+                </td>
+                <td>
+                    <span th:text="${course.createSubjectNum}"></span>
+                </td>
+                <td>
+                    <span th:text="${course.joinNum}"></span>
+                </td>
+                <td>
+                    <a th:href="@{'/courseModi/'+ ${course.id}}"
+                       class="btn btn-block">수정</a>
+                    <a th:href="@{'/courseDetail/'+ ${course.id}}"
+                       class="btn btn-block">조회</a>
+                    <a th:href="@{/}"
+                       class="btn btn-danger">삭제</a>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- pagination -->
+    <nav class="navbar" aria-label="Page navigation" style="text-align: center;">
+        <ul class="pagination"
+            th:with="startNumber=${T(Math).floor(courseList.number/10)} * 10 + 1,
+                            endNumber=(${courseList.totalPages} > ${startNumber} + 9) ? ${startNumber} + 9 : ${courseList.totalPages}">
+
+            <li th:style="${courseList.first} ? 'display:none'"><a href="/board/list?page=1">&laquo;</a></li>
+            <li th:style="${courseList.first} ? 'display:none'">
+                <a th:href="@{/course/list(page=${courseList.number})}">&lsaquo;</a>
+            </li>
+            <li th:each="page : ${#numbers.sequence(startNumber, endNumber)}"
+                th:class="(${page} == ${courseList.number} + 1) ? 'active'">
+                <a th:href="@{/course/list(page=${page})}" th:text="${page}">
+                    <span class="sr-only"></span>
+                </a>
+            </li>
+            <li th:style="${courseList.last} ? 'display:none'">
+                <a th:href="@{/course/list(page=${courseList.number} + 2)}">&rsaquo;</a>
+            </li>
+            <li th:style="${courseList.last} ? 'display:none'">
+                <a th:href="@{/course/list(page=${courseList.totalPages})}">&raquo;</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

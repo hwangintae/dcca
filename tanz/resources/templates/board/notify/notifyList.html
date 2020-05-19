@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="tn btn-primary" th:href="@{/board/create}">등록</a>
+
+    <form align="right" th:action="@{/board/notify/search}">
+        <input th:name="keyword" type="text" placeholder="글 제목을 입력해주세요">
+        <input type="submit" class="tn btn-primary"/>
+    </form>
+
+
+<div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th class="one wide">번호</th>
+            <th class="ten wide">글제목</th>
+            <th class="two wide">작성자</th>
+            <th class="three wide">작성일</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <!-- CONTENTS !-->
+        <tr th:each="board,i : ${boardList}">
+            <td>
+                <span th:text="${i.count} + ${boardList.number} * 10"></span>
+            </td>
+            <td>
+                <a th:href="@{'/board/notify/' + ${board.id}}">
+                    <span th:text="${board.title}"></span>
+                </a>
+            </td>
+            <td>
+                <span th:text="${board.writer}"></span>
+            </td>
+            <td>
+                <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+    <!-- pagination -->
+    <nav class="navbar" aria-label="Page navigation" style="text-align: center;">
+        <ul class="pagination"
+            th:with="startNumber=${T(Math).floor(boardList.number/10)} * 10 + 1,
+                            endNumber=(${boardList.totalPages} > ${startNumber} + 9) ? ${startNumber} + 9 : ${boardList.totalPages}">
+
+            <li th:style="${boardList.first} ? 'display:none'"><a href="/board/list?page=1">&laquo;</a></li>
+            <li th:style="${boardList.first} ? 'display:none'">
+                <a th:href="@{/board/list(page=${boardList.number})}">&lsaquo;</a>
+            </li>
+            <li th:each="page : ${#numbers.sequence(startNumber, endNumber)}"
+                th:class="(${page} == ${boardList.number} + 1) ? 'active'">
+                <a th:href="@{/board/list(page=${page})}" th:text="${page}">
+                    <span class="sr-only"></span>
+                </a>
+            </li>
+            <li th:style="${boardList.last} ? 'display:none'">
+                <a th:href="@{/board/list(page=${boardList.number} + 2)}">&rsaquo;</a>
+            </li>
+            <li th:style="${boardList.last} ? 'display:none'">
+                <a th:href="@{/board/list(page=${boardList.totalPages})}">&raquo;</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

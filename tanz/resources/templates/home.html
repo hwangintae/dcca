@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="jumbotron">
+        <h1>TANZ manage</h1>
+        <p sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')">
+            <a class="btn btn-lg btn-secondary" href="/members">회원 조회</a>
+        </p>
+        <p>
+            <a sec:authorize="hasRole('ROLE_TEACHER')" class="btn btn-lg btn-secondary" href="/exams/new">성적 입력</a>
+            <a sec:authorize="isAuthenticated()"class="btn btn-lg btn-secondary" href="/exams">성적 조회</a>
+        </p>
+        <p>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-lg btn-secondary" href="/course/list">개설 과목 관리</a>
+        </p>
+        <p sec:authorize="hasRole('ROLE_ADMIN')" class="lead">교사 관리</p>
+        <p>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-lg btn-secondary" href="/members/teacher/new">교사 등록</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-lg btn-secondary" href="/members/teacher">교사 조회</a>
+        </p>
+        <p class="lead">게시판</p>
+        <p>
+            <a class="btn btn-lg btn-secondary" href="/board/list">공지사항</a>
+            <a class="btn btn-lg btn-secondary" href="/">QnA</a>
+        </p>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>
